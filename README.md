@@ -44,12 +44,9 @@
 ### What I learned
 
 Working with SCSS animations, BEM & MediaQueries specially
-
-- working with CSS GRID Areas combined with Dynamic Grid columns and rows.
-- creating all the logic in Javascript to do the math.
+- creating all the logic in Javascript to do the creation of the data frames dynamically.
 - Using forEach again to iterate on the buttons
-- Using javascript to add the logic to reset input fields , classes and button's active state.
-- I took the liberty to avoid using the custom button to make things easier for the customer.
+- Using javascript to add the logic to make classes and elements to the DOM. for just a small project it was interested how I needed a bit of complex logic to resolve this because the combination of DOM , CSS classes manipulation and fetching a json data 
 
 ```
 
