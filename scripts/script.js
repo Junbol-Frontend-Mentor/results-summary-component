@@ -46,8 +46,8 @@ fetchDataAsync();
 }; */
 
 //--Fourth try: better but still lost
-/* const createDataFrames = (placeHolder) => {//'parseData' is just a placeholder used in the parameter to receive 
-  placeHolder.forEach(item => {
+/* const createDataFrames = (placeHolder) => {//'parseData' is just aparsedDataPlaceHolder used in the parameter to receive 
+ parsedDataPlaceHolder.forEach(item => {
     let frameDiv = document.createElement('div');
     myFramesContainer.appendChild(frameDiv);
     //now that the div is added, Insert here the icon...//❓not clue how to insert it
@@ -55,8 +55,8 @@ fetchDataAsync();
 }; */
 
 //--Fifth try: better but still lost
-/* const createDataFrames = (placeHolder) => {//'parseData' is just a placeholder used in the parameter to receive 
-  placeHolder.forEach(item => {
+/* const createDataFrames = (placeHolder) => {//'parseData' is just aparsedDataPlaceHolder used in the parameter to receive 
+ parsedDataPlaceHolder.forEach(item => {
     let frameDiv = document.createElement('div');
     myFramesContainer.appendChild(frameDiv);
     //You need to use img. So create an img element and add it:
@@ -68,8 +68,8 @@ imgElement.item.icon; //I really don't know how to access the 'icon' key in pars
 
 //--Sixth try: better but almost there
 
-const createDataFrames = (placeHolder) => {
-  placeHolder.forEach((item) => {
+const createDataFrames = (parsedDataPlaceHolder) => {// I called parsedDataPlaceHolder to know that here parsedData comes here and replace the placeHolder
+ parsedDataPlaceHolder.forEach((item) => {
     let frameDiv = document.createElement('div');
     frameDiv.classList.add('frame'); // Add class for styling
 
