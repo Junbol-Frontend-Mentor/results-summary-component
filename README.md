@@ -43,10 +43,9 @@
 
 ### What I learned
 
-Working with SCSS animations, BEM & MediaQueries specially
 - creating all the logic in Javascript to do the creation of the data frames dynamically.
 - Using forEach again to iterate on the buttons
-- Using javascript to add the logic to make classes and elements to the DOM. for just a small project it was interested how I needed a bit of complex logic to resolve this because the combination of DOM , CSS classes manipulation and fetching a json data 
+- Using javascript to add the logic to make classes and elements to the DOM. for just a small project it was interested how I needed a bit of complex logic to resolve this because the combination of DOM , CSS classes manipulation and fetching a json data
 
 ```
 
