@@ -76,7 +76,7 @@ body {
   width: 100%;
   min-height: 100vh;
   display: flex;
-  position:relative;
+  position: relative;
   flex-direction: column;
   //justify-content:center;
   //background-color: burlywood;
@@ -123,7 +123,6 @@ body {
   &__title {
     @include typography(500, 2rem, 1.5, color('white'));
     margin-top: 3rem;
-  
   }
 
   &__text {
@@ -147,15 +146,13 @@ h2 {
   @include typography(500, 2rem, 0.5, color('white'));
 }
 
-
-
 .whiteContainer {
-width:80%;
-display:flex;
-flex-direction: column;
-margin: 0 auto;
-margin-top: 2rem;
-//background-color:beige
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 2rem;
+  //background-color:beige
 }
 
 .frames-grp {
@@ -177,7 +174,8 @@ margin-top: 2rem;
   transition: transform 0.7s ease, background-color 0.7s ease; // Include background color transition
 
   &:hover,
-  &:focus { // Add focus state ✅
+  &:focus {
+    // Add focus state ✅
     transform: scale(1.05);
   }
 
@@ -218,7 +216,8 @@ margin-top: 2rem;
   color: color('white');
 
   &:hover,
-  &:focus { // Add focus state ✅
+  &:focus {
+    // Add focus state ✅
     background-color: color('violet-blue');
     transform: scale(1.05);
   }
@@ -248,7 +247,6 @@ margin-top: 2rem;
 @media (min-width: 768px) {
   .main {
     padding: 10rem;
-
   }
 
   .container {
@@ -268,18 +266,17 @@ margin-top: 2rem;
   }
 
   .whiteContainer {
-    width:80%;
-    display:flex;
+    width: 80%;
+    display: flex;
     flex-direction: column;
     margin: 0 auto;
     margin-top: 0.1rem;
-    }
+  }
 
   .attribution {
     grid-area: footer; // Assigns the footer to the 'footer' area
   }
 }
-
 
 /////// -------- NOTES --------------------//////////
 ///

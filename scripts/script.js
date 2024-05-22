@@ -94,6 +94,17 @@ const createDataFrames = (parsedDataPlaceHolder) => {// I called parsedDataPlace
       frameDiv.style.backgroundColor = item.bgColor.replace(/[\d\.]+\)$/, '0.3)'); // Change alpha on hover
     });
 
+ /*    The expression /[\d\.]+\)$/ is used to find the alpha value in an HSLA color string and replace it.
+
+  // Change the alpha value of the background color on hover
+      // The regular expression /[\d\.]+\)$/ matches the alpha value in the HSLA color string
+      // - [\d\.]+ matches one or more digits (\d) or a dot (\.)
+      // - \) matches the closing parenthesis
+      // - $ matches the end of the string
+      // The replace method substitutes the matched part (the original alpha value and closing parenthesis) with '0.3)'
+      // This effectively changes the alpha value to 0.3, creating a semi-transparent effect on hover
+
+
     frameDiv.addEventListener('mouseout', () => {
       frameDiv.style.backgroundColor = item.bgColor; // Revert to original color
     });
@@ -106,3 +117,21 @@ const createDataFrames = (parsedDataPlaceHolder) => {// I called parsedDataPlace
 
 
 */
+
+
+/////// ---- REGULAR EXPRESSION LOGIC -----///////////////////////
+/* Example Explanation:
+Given an HSLA color string like hsla(252, 100%, 67%, 0.3), the regular expression [\d\.]+\)$ will match 0.3).
+
+Replacement Logic:
+The replace method is used to substitute the matched part of the string with the new alpha value.
+
+item.bgColor.replace(/[\d\.]+\)$/, '0.3)'):
+item.bgColor: The original HSLA color string.
+.replace(/[\d\.]+\)$/, '0.3)'): Replaces the matched part (0.3)) with the new alpha value (0.3)).
+Step-by-Step Explanation:
+Original String: hsla(252, 100%, 67%, 0.3)
+Regex Match: 0.3)
+The regular expression [\d\.]+\)$ matches the 0.3) part of the string.
+Replacement: 0.3)
+The replace method substitutes 0.3) with 0.3). */
