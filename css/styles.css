@@ -24,7 +24,7 @@ body {
   align-items: center;
 }
 
-main {
+.main {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -35,8 +35,8 @@ main {
   width: 100%;
   min-height: 100vh;
   display: flex;
+  position: relative;
   flex-direction: column;
-  align-items: center;
 }
 
 .blue-card {
@@ -50,7 +50,7 @@ main {
   padding: 2rem;
   background-image: linear-gradient(hsl(252, 100%, 67%), hsl(234, 85%, 45%));
 }
-.blue-card h3 {
+.blue-card__header {
   font-family: "Hanken Grotesk", sans-serif;
   font-weight: 500;
   font-size: 1.8rem;
@@ -78,14 +78,14 @@ main {
   margin-top: 4rem;
 }
 .blue-card__circle p {
-  margin-top: 0.1rem;
+  margin-top: 1rem;
   font-family: "Hanken Grotesk", sans-serif;
   font-weight: 500;
   font-size: 1.5rem;
   line-height: 1.5;
-  color: hsl(252, 100%, 67%);
+  color: hsl(221, 100%, 96%);
 }
-.blue-card h2 {
+.blue-card__title {
   font-family: "Hanken Grotesk", sans-serif;
   font-weight: 500;
   font-size: 2rem;
@@ -93,11 +93,13 @@ main {
   color: hsl(0, 0%, 100%);
   margin-top: 3rem;
 }
-.blue-card p {
+.blue-card__text {
+  width: 100%;
   margin-top: 2rem;
+  text-align: center;
   font-family: "Hanken Grotesk", sans-serif;
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   line-height: 1.5;
   color: hsl(241, 100%, 89%);
 }
@@ -120,22 +122,73 @@ h2 {
   color: hsl(0, 0%, 100%);
 }
 
-.reset-btn {
-  width: 15rem;
+.whiteContainer {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+.frames-grp {
+  width: 100%;
+  height: 30rem;
+  margin: 0rem 0 2rem 0;
+}
+
+.frame {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 6rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  transition: transform 0.7s ease, background-color 0.7s ease;
+}
+.frame:hover, .frame:focus {
+  transform: scale(1.05);
+}
+.frame img {
+  height: 4rem;
+}
+
+.score {
   height: 3rem;
+  display: flex;
+  align-items: center;
+  color: black;
+  font-weight: 800;
+  margin-top: 1rem;
+  font-size: 2rem;
+}
+.score::after {
+  content: "/100";
+  color: gray;
+  margin-left: 0.5rem;
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.continue-btn {
+  width: 15rem;
+  height: 4rem;
   font-family: "Hanken Grotesk", sans-serif;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.7rem;
   line-height: 0.5;
-  border-radius: 5px;
+  border-radius: 50px;
+  background-color: hsl(0, 0%, 0%);
   cursor: pointer;
   border-style: none;
   margin: 0 auto;
   transition: transform 0.7s ease;
-  margin-bottom: 0.5rem;
-  transition: transform 0.7s ease;
+  margin-top: 0.5rem;
+  color: hsl(0, 0%, 100%);
 }
-.reset-btn:hover {
+.continue-btn:hover, .continue-btn:focus {
+  background-color: hsl(256, 72%, 46%);
   transform: scale(1.05);
 }
 
@@ -147,35 +200,36 @@ h2 {
   margin-bottom: 3rem; /* Keeps the footer at the bottom but only after all other content */
   color: hsl(0, 0%, 50%);
 }
-
 .attribution a {
-  color: hsl(0, 0%, 100%);
+  color: hsl(0, 0%, 0%);
   text-decoration: none;
 }
 
 /* Media Query for Desktops and Tablets */
 @media (min-width: 768px) {
-  main {
-    margin-top: 3rem;
+  .main {
+    padding: 10rem;
   }
   .container {
     width: 60rem;
-  }
-  .calculator {
-    min-height: 28rem;
-    flex-direction: row;
-    justify-content: space-between;
-    border-radius: 20px 20px 20px 20px;
-  }
-  .calculator__leftPanel-grp {
-    width: 30rem;
-    height: 28rem;
+    min-height: 50vh;
     display: flex;
-    margin-right: 2rem;
-    margin-bottom: 1rem;
+    flex-direction: row;
+    justify-content: space-around;
   }
-  .calculator .results-grp {
-    width: 30rem;
+  .blue-card {
+    width: 60rem;
+    min-height: 30rem; /* Use min-height to accommodate varying content sizes */
+    border-radius: 40px 40px 40px 40px;
+    padding: 2rem;
+    margin-right: 2rem;
+  }
+  .whiteContainer {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 0.1rem;
   }
   .attribution {
     grid-area: footer;

@@ -11,6 +11,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body section,
 header {
   padding: 0;
@@ -63,7 +64,7 @@ body {
   background-color: color('light-grayish-cyan');
 }
 
-main {
+.main {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -75,8 +76,8 @@ main {
   width: 100%;
   min-height: 100vh;
   display: flex;
+  position:relative;
   flex-direction: column;
-  align-items: center;
   //justify-content:center;
   //background-color: burlywood;
 }
@@ -91,10 +92,12 @@ main {
   border-radius: 0px 0px 40px 40px;
   padding: 2rem;
   background-image: linear-gradient(color('light-slate-blue'), color('cobalt-blue'));
-  h3 {
+
+  &__header {
     @include typography(500, 1.8rem, 0.5, color('white'));
     margin-top: 1rem;
   }
+
   &__circle {
     width: 14rem;
     height: 14rem;
@@ -105,22 +108,30 @@ main {
     align-items: center;
     border-radius: 50%;
     background-image: linear-gradient(color('cobalt-blue'), color('light-slate-blue'));
+
     h1 {
       @include typography(600, 6rem, 0.5, color('white'));
       margin-top: 4rem;
     }
+
     p {
-      margin-top: 0.1rem;
-      @include typography(500, 1.5rem, 1.5, color('light-slate-blue'));
+      margin-top: 1rem;
+      @include typography(500, 1.5rem, 1.5, color('pale-blue'));
     }
   }
-  h2 {
+
+  &__title {
     @include typography(500, 2rem, 1.5, color('white'));
     margin-top: 3rem;
+  
   }
-  p {
+
+  &__text {
+    width: 100%;
     margin-top: 2rem;
-    @include typography(500, 1.5rem, 1.5, color('light-lavender'));
+    text-align: center;
+    @include typography(500, 1.4rem, 1.5, color('light-lavender'));
+    //background-color: cadetblue;
   }
 }
 
@@ -136,29 +147,86 @@ h2 {
   @include typography(500, 2rem, 0.5, color('white'));
 }
 
-.reset-btn {
+
+
+.whiteContainer {
+width:80%;
+display:flex;
+flex-direction: column;
+margin: 0 auto;
+margin-top: 2rem;
+//background-color:beige
+}
+
+.frames-grp {
+  width: 100%;
+  height: 30rem;
+  margin: 0rem 0 2rem 0; // top right bottom left
+  //background-color:aqua; //for testing
+}
+
+.frame {
+  display: flex; // Set display to flex
+  align-items: center; // Vertically center items
+  justify-content: space-around; // Distribute items with space around
+  width: 100%; // Set width
+  height: 6rem; // Set height
+  padding: 1rem; // Set padding
+  margin-bottom: 2rem; // Set bottom margin
+  border-radius: 10px; // Optional: add border-radius
+  transition: transform 0.7s ease, background-color 0.7s ease; // Include background color transition
+
+  &:hover,
+  &:focus { // Add focus state ✅
+    transform: scale(1.05);
+  }
+
+  img {
+    height: 4rem; // Set image height
+  }
+}
+
+.score {
+  height: 3rem; // Set height
+  display: flex; // Set display to flex
+  align-items: center; // Vertically center text
+  color: black; // Set font color
+  font-weight: 800; // Set font weight
+  margin-top: 1rem;
+  font-size: 2rem; // Set font size
+
+  &::after {
+    content: '/100'; // Add /100 text
+    color: gray; // Set color to gray
+    margin-left: 0.5rem; // Add some spacing
+    font-weight: 400; // Set font weight
+    font-size: 1.5rem; // Set font size
+  }
+}
+
+.continue-btn {
   width: 15rem;
-  height: 3rem;
-  @include typography(600, 1.2rem, 0.5, color('very-dark-cyan'));
-  //border-style: none;
-  border-radius: 5px;
-  background-color: color('strong-cyan');
+  height: 4rem;
+  @include typography(600, 1.7rem, 0.5, color('very-dark-cyan'));
+  border-radius: 50px;
+  background-color: color('black');
   cursor: pointer;
   border-style: none;
   margin: 0 auto;
   transition: transform 0.7s ease;
-  margin-bottom: 0.5rem;
-  transition: transform 0.7s ease;
-  &:hover {
-    //🚩remember how to nest hovers with &
-    background-color: color('lighter-strong-cyan');
+  margin-top: 0.5rem;
+  color: color('white');
+
+  &:hover,
+  &:focus { // Add focus state ✅
+    background-color: color('violet-blue');
     transform: scale(1.05);
   }
 }
 
 // ------- MAGIC ----------------------------
 
-//------   FOOTER    ----------------
+//------ FOOTER ----------------
 
 .attribution {
   width: 100%;
@@ -167,52 +235,51 @@ h2 {
   margin-top: 2rem;
   margin-bottom: 3rem; /* Keeps the footer at the bottom but only after all other content */
   color: color('grey');
-}
-.attribution a {
-  color: color('white');
-  text-decoration: none;
+
+  a {
+    color: color('black');
+    text-decoration: none;
+  }
 }
 
 //------ MEDIA QUERY FOR DESKTOPS AND TABLETS ----------------
 
 /* Media Query for Desktops and Tablets */
 @media (min-width: 768px) {
-  main {
-    margin-top: 3rem;
+  .main {
+    padding: 10rem;
+
   }
 
   .container {
     width: 60rem;
-
-    //flex-direction: row;
-  }
-
-  .calculator {
-    min-height: 28rem;
+    min-height: 50vh;
+    display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    border-radius: 20px 20px 20px 20px;
-    //flex: 1;
-    &__leftPanel-grp {
-      width: 30rem;
-      height: 28rem;
-      display: flex;
-      margin-right: 2rem;
-      margin-bottom: 1rem;
-      //background-color: rgb(138, 226, 138);
-    }
+    justify-content: space-around;
   }
 
-  .calculator .results-grp {
-    //🐞🚩✅ A single class selector (e.g., .results-grp) has a lower specificity compared to a nested selector (e.g., .calculator .results-grp). By adding .calculator .results-grp, you increased the specificity, ensuring it overrides the mobile-first styles.
-    width: 30rem;
-    //background-color: brown; /* For testing purposes */
+  .blue-card {
+    width: 60rem;
+    min-height: 30rem; /* Use min-height to accommodate varying content sizes */
+    border-radius: 40px 40px 40px 40px;
+    padding: 2rem;
+    margin-right: 2rem;
   }
+
+  .whiteContainer {
+    width:80%;
+    display:flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 0.1rem;
+    }
 
   .attribution {
     grid-area: footer; // Assigns the footer to the 'footer' area
   }
 }
+
 
 /////// -------- NOTES --------------------//////////
 ///

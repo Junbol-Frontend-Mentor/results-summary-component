@@ -1,42 +1,113 @@
 //-------DECLARING VARIABLES -------------
-let myBillAmount = document.getElementById('bill-amount');
-let my5Btn = document.getElementById('5btn');
-let my10Btn = document.getElementById('10btn');
-let my15Btn = document.getElementById('15btn');
-let my20Btn = document.getElementById('20btn');
-let my30Btn = document.getElementById('30btn');
-let my50Btn = document.getElementById('50btn');
-let numberOfPeopleInput = document.getElementById('num-people'); // ✅ Renamed to avoid confusion with variable name
-//let myTipAmount = document.getElementById('tip-amount');
-//let myResetBtn = document.getElementById('reset-button');
+let myFramesContainer = document.getElementById('frames');
+
+//------- FETCHING DATA ----------------
+
+const fetchDataAsync = async () => {
+  try {
+    const response = await fetch('data.json'); // Use the correct path to your JSON file
+    const parsedData = await response.json();
+    createDataFrames(parsedData); // Call the function with parsed data to realease it from prison
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+fetchDataAsync();
 
 //------- DEFINING FUNCTIONS    -------------
-
 let billInput = 0;
 let tipAmount = 0;
 let tipAmountTotal = 0;
 let numberOfPeople = 0;
 let total = 0;
 
-//----------- callCalculateTipAmount--------------
-const callCalculateTipAmount = () => {
-  // this function needed to be move up here before its calling bellow
-  const tipAmountElement = document.getElementById('tip-amount'); // ✅ Access the tip amount element
-  if (!isNaN(billInput) && billInput > 0 && !isNaN(tipAmount) && tipAmount > 0 && !isNaN(numberOfPeople) && numberOfPeople > 0) {
-    calculateTipAmount(); // ✅ Call the function to calculate and display the tip amount
-  } else {
-    tipAmountElement.innerHTML = '0.00'; // ✅ Reset or clear the tip amount display if inputs are incomplete
+//----------- createDataFrames--------------
+
+//--First try: very lost 🤪
+/* const createDataFrames= () => {
+  const item= parsedData.forEach() => {
+    document.createElement.innerHTML = <div></div>;
   }
+  createDataFrames();
+};
+ */
+
+//--Second try: better but still lost
+/* const createDataFrames= () => {
+  const item= parsedData.forEach(item => {
+    document.createElement.appendChild = <div></div>;// ❌ you don/t append a div like this 🤪
+  })
+  createDataFrames();
+}; */
+
+//--Third try: better but still lost
+/* const createDataFrames= () => {
+  const item= parsedData.forEach(item => {
+    let frameDiv = document.createElement('div'); // createElement is a method and this is how you add a div
+    myFramesContainer.appendChild = frameDiv ; // ❌ appendChild is also method not a variable 🤪
+  })
+  createDataFrames();
+}; */
+
+//--Fourth try: better but still lost
+/* const createDataFrames = (placeHolder) => {//'parseData' is just a placeholder used in the parameter to receive 
+  placeHolder.forEach(item => {
+    let frameDiv = document.createElement('div');
+    myFramesContainer.appendChild(frameDiv);
+    //now that the div is added, Insert here the icon...//❓not clue how to insert it
+  });
+}; */
+
+//--Fifth try: better but still lost
+/* const createDataFrames = (placeHolder) => {//'parseData' is just a placeholder used in the parameter to receive 
+  placeHolder.forEach(item => {
+    let frameDiv = document.createElement('div');
+    myFramesContainer.appendChild(frameDiv);
+    //You need to use img. So create an img element and add it:
+    let imgElement = document.createElement('img');
+    myFramesContainer.appendChild(imgElement);//❌ wrong location to put this
+imgElement.item.icon; //I really don't know how to access the 'icon' key in parsedData
+  });
+}; */
+
+//--Sixth try: better but almost there
+
+const createDataFrames = (placeHolder) => {
+  placeHolder.forEach((item) => {
+    let frameDiv = document.createElement('div');
+    frameDiv.classList.add('frame'); // Add class for styling
+
+    myFramesContainer.appendChild(frameDiv);
+
+    // Create an img element and set its src attribute to the icon path
+    let imgElement = document.createElement('img');
+    imgElement.src = item.icon; // Set src attribute to the icon path
+    frameDiv.appendChild(imgElement); // Append imgElement to frameDiv
+
+    // Create a p element and set its textContent to the score
+    let scoreElement = document.createElement('p');
+    scoreElement.textContent = item.score; // Set textContent to the score value only
+    scoreElement.classList.add('score'); // Add a class for pseudo-element
+    frameDiv.appendChild(scoreElement); // Append scoreElement to frameDiv
+
+    // Set background color dynamically
+    frameDiv.style.backgroundColor = item.bgColor; // Set background color
+
+      // Set hover effect dynamically
+      frameDiv.addEventListener('mouseover', () => {
+        frameDiv.style.backgroundColor = item.bgColor.replace(/[\d\.]+\)$/, '0.3)'); // Change alpha on hover
+      });
+  
+      frameDiv.addEventListener('mouseout', () => {
+        frameDiv.style.backgroundColor = item.bgColor; // Revert to original color
+      });
+  });
 };
 
-//----------- handleBillInput---------------
-const handleBillInput = (event) => {
-  billInput = parseFloat(event.target.value); // ✅ 🚩✅ I used at first onChange but with event I need to only use target.Ensure billInput is a number
-  callCalculateTipAmount(); // ✅ Call function to check conditions and calculate tip
-};
 
 //----------- handleTipButtonClick---------------
-const handleTipButtonClick = (event) => {
+/* const handleTipButtonClick = (event) => {
   let myDataTip = event.target.getAttribute('data-tip');
   tipAmount = parseFloat(myDataTip) / 100;
 
@@ -48,46 +119,10 @@ const handleTipButtonClick = (event) => {
   });
   event.target.classList.add('tip-buttons-grp__active'); // Add active class to the clicked button
   callCalculateTipAmount();
-};
-
-//----------- handleNumberOfPeopleInput---------------
-const handleNumberOfPeopleInput = (event) => {
-  numberOfPeople = parseFloat(event.target.value); //
-  callCalculateTipAmount(); // ✅ Call function to check conditions and calculate tip
-};
-
-//----------- calculateTipAmount---------------
-//----------- calculateTipAmount---------------
-const calculateTipAmount = () => {
-  const totalTipAmount = billInput * tipAmount;
-  const tipAmountPerPerson = totalTipAmount / numberOfPeople; // ✅ Correct formula for per person calculation
-  document.getElementById('tip-amount').innerHTML = tipAmountPerPerson.toFixed(2); // ✅ Use toFixed(2) to format the number to two decimal places
-
-  //----------- handleTotalAmount---------------
-  // ✅ Update total amount per person
-  const totalAmountPerPerson = (billInput + totalTipAmount) / numberOfPeople;
-  document.getElementById('total-amount').innerHTML = totalAmountPerPerson.toFixed(2); // ✅ Use toFixed(2) to format the number to two decimal places
-};
-//----------- handleReset---------------
-const handleReset = () => {
-  billInput = 0;
-  tipAmount = 0;
-  tipAmountTotal = 0;
-  numberOfPeople = 0;
-  total = 0;
-  document.getElementById('bill-amount').value = '';
-  document.getElementById('num-people').value = '';
-  document.getElementById('tip-amount').innerHTML = '0.00';
-  document.getElementById('total-amount').innerHTML = '0.00';
-  //Remove active class from all buttons
-  let buttons = document.querySelectorAll('.tip-buttons-grp__tipBtn');
-  buttons.forEach((button) => {
-    button.classList.remove('tip-buttons-grp__active');
-  });
-};
+}; */
 
 // Adding event listeners
-document.getElementById('bill-amount').addEventListener('input', handleBillInput);
+/* document.getElementById('bill-amount').addEventListener('input', handleBillInput);
 document.getElementById('5btn').addEventListener('click', handleTipButtonClick);
 document.getElementById('10btn').addEventListener('click', handleTipButtonClick);
 document.getElementById('15btn').addEventListener('click', handleTipButtonClick);
@@ -95,7 +130,7 @@ document.getElementById('25btn').addEventListener('click', handleTipButtonClick)
 document.getElementById('30btn').addEventListener('click', handleTipButtonClick);
 document.getElementById('50btn').addEventListener('click', handleTipButtonClick);
 document.getElementById('num-people').addEventListener('input', handleNumberOfPeopleInput);
-document.getElementById('reset-button').addEventListener('click', handleReset);
+document.getElementById('reset-button').addEventListener('click', handleReset); */
 
 /////// ---- PSEUDO CODE -----///////////////////////
 /*
@@ -147,11 +182,10 @@ document.getElementById('button').addEventListener('click', () => {
 
 Concise Arrow Functions Syntax Variations:
 
-Single Parameter without Parentheses:
+Anonymous arrow with a Single Parameter without Parentheses:
 
 If the arrow function has a single parameter, you can omit the parentheses.
-javascript
-Copy code
+
 const greet = name => `Hello, ${name}`;
 
 
@@ -552,7 +586,7 @@ if (user.isLoggedIn && user.hasPermission) {
   console.log("Access denied.");
 }
 
-Error Handling:
+//-------- Error Handling: ----------------
 
 try {
   // Code that may throw an error
@@ -566,7 +600,7 @@ try {
 
 Promises and Async/Await:
 
-// Using Promises
+//-----Using Promises ---------
 const fetchData = () => {
   return new Promise((resolve, reject) => {
     // Simulate an async operation
@@ -580,7 +614,9 @@ fetchData()
   .then(data => console.log(data))
   .catch(error => console.error(error));
 
-// Using Async/Await
+
+//------ Using Async/Await---------- 🚩 Use this one mostly
+
 const fetchDataAsync = async () => {
   try {
     const data = await fetchData();
@@ -592,6 +628,19 @@ const fetchDataAsync = async () => {
 
 fetchDataAsync();
 
+
+-------------    Fetching JOSN Data   --------------------
+
+const fetchDataAsync = async () => {
+  try {
+    const response = await fetch('data.json'); // Use the correct path to your JSON file
+    const parsedData = await response.json();
+    createDataFrames(parsedData); // Call the function with parsed data to realease it from prison
+  } catch (error) {
+    console.error(error);
+  }
+};
+fetchDataAsync();
 
 -------------    Fetching Data   --------------------
 
