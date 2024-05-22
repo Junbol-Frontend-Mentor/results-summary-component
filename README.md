@@ -25,8 +25,8 @@
 
 ### Links
 
-- Solution URL: (https://github.com/Junbol-Frontend-Mentor/tip-calculator-app)
-- Live Site URL: (https://junbol-frontend-mentor.github.io/tip-calculator-app/)
+- Solution URL: (https://github.com/Junbol-Frontend-Mentor/results-summary-component)
+- Live Site URL: (https://junbol-frontend-mentor.github.io/results-summary-component/)
 
 ## My process
 
